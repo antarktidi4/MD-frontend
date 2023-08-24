@@ -14,7 +14,6 @@ type SuccessResponse = {
 type FailResponse = Error;
 
 export default function useLoginRequest(body: LoginBody, onSuccess?: onSuccessFn<SuccessResponse>, onFail?: onFailFn<FailResponse>) {
-  console.log(body);
   return useApi(
     new ApiRequest("/api/auth/login", ApiRequestType.POST, {}, body, true),
     onSuccess,
