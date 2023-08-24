@@ -1,5 +1,6 @@
 import ColoredRating from "@components/atomic/ColoredRating"
 import Avatar from "@components/userCards/Avatar";
+import markdownSettings from "@utils/markdownSettings";
 import ReactMarkdown from "react-markdown";
 
 interface ReviewCardProps {
@@ -20,7 +21,7 @@ export default function ReviewCard({ id, userId, username, avatar, rating, revie
           <p class="flex flex-row gap-1">{username} (<ColoredRating rating={rating} />)</p>
         </div>
       </a>
-      <ReactMarkdown>
+      <ReactMarkdown components={markdownSettings}>
         {review}
       </ReactMarkdown>
     </div>
