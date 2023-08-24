@@ -3,7 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { render } from "preact";
 import { LocationProvider, Router, Route } from "preact-iso";
-import { Flip, ToastContainer } from "react-toastify";
+import { Flip, ToastContainer, toast } from "react-toastify";
 import { tokenStore } from "@stores/tokenStore";
 import Header from "@components/header/Header";
 import Home from "@pages/Home";
@@ -17,15 +17,22 @@ import { userStore } from "@stores/userStore";
 import Movie from "@pages/movie/Movie";
 import GenreSearch from "@pages/search/GenreSearch";
 import UserSetting from "@pages/user/UserSettings";
+import useGetUserRequest from "@api/user/getUserRequest";
 
 export function App() {
   const token = tokenStore(state => state.token);
   const [user, setUser] = userStore(state => [state.user, state.set]);
 
   if (token !== null && user === null) {
-    // TODO: replace with call GET /api/users/{id} 
     const tokenData = JSON.parse(window.atob(token.split(".")[1]));
-    setUser({ id: tokenData.userId, username: tokenData.sub, email: "", avatar: null, about: null });
+    
+    const { call } = useGetUserRequest(
+      tokenData.userId,
+      data => setUser(data),
+      error => toast.error(error.message),
+    );
+    
+    call();
   }
 
   return (
