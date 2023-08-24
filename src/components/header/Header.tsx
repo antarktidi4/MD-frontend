@@ -8,7 +8,7 @@ export default function Header() {
   const user = userStore(state => state.user);
 
   return (
-    <div class="flex flex-row  py-2 bg-nord1 drop-shadow-sm">
+    <div class="flex flex-row py-2 bg-nord1 drop-shadow-sm">
       <div class="basis-1/6 ps-2 pt-0.5">
         <Logo />
       </div>

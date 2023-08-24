@@ -27,7 +27,7 @@ export default function TitleSearch({ title }: TitleSearchProps) {
 
   useEffect(() => search(), [title, page, findKp]);
 
-  if (isLoading) return <Loading />;
+  if (isLoading || (!isLoading && !isError && response.success?.movies?.length === 0)) return <Loading />;
   if (isError) return <Error message={response.fail.message} />
 
   return (

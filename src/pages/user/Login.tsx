@@ -35,7 +35,7 @@ export default function Login() {
         <FormInput
           value={formState.password}
           onInput={t => setFormState({ ...formState, password: t.value })}
-          placeholder="password" autocomplete
+          placeholder="password" autocomplete type="password"
         />
         <FormButton
           isLoading={isLoading}

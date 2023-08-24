@@ -1,6 +1,5 @@
 import useUpdateAboutRequest from "@api/user/updateAboutRequest";
 import useUpdateAvatarRequest from "@api/user/updateAvatarRequest";
-import LoadingSvg from "@components/atomic/LoadingSpin";
 import Form from "@components/atomic/form/Form";
 import FormButton from "@components/atomic/form/FormButton";
 import FormInput from "@components/atomic/form/FormInput";
@@ -109,8 +108,6 @@ function AvatarUpdate() {
     </div>
   );
 }
-
-
 
 function Joke() {
   return (

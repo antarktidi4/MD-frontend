@@ -29,7 +29,7 @@ interface PaginatorButton {
 function PaginatorButton({ children, onClick, disabled }: PaginatorButton) {
   return (
     <button
-      className={`rounded ${disabled ? "bg-nord0 text-nord1" : "bg-nord1 hover:bg-nord2"} w-5/12 shadow-sm`}
+      className="rounded bg-nord1 enabled:hover:bg-nord2 disabled:bg-nord0 disabled:text-nord1 w-5/12 shadow-sm"
       onClick={onClick}
       disabled={disabled}
     >

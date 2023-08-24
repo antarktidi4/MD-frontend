@@ -1,5 +1,6 @@
 import Card from "@components/atomic/Card"
 import ColoredRating from "@components/atomic/ColoredRating"
+import markdownSettings from "@utils/markdownSettings";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown"
 
 interface ReviewCardProps {
@@ -15,7 +16,7 @@ interface ReviewCardProps {
 export default function ExpandedReviewCard({ id, title, releaseYear, posterUrl, averageRating, rating, review }: ReviewCardProps) {
   return (
     <Card header={<Header id={id} title={title} releaseYear={releaseYear} averageRating={averageRating} rating={rating} />} imageURL={posterUrl}>
-      <ReactMarkdown>
+      <ReactMarkdown components={markdownSettings}>
         {review}
       </ReactMarkdown>
     </Card>

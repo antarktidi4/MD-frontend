@@ -3,21 +3,13 @@ import ApiRequest, { ApiRequestType } from "@api/base/apiRequest";
 import { Error } from "@api/commonTypes/error";
 import { User } from "@api/commonTypes/user";
 
-type UserBody = {
-  username: string,
-  email: string,
-  password: string,
-  confirmPassword: string,
-};
-
 type SuccessResponse = User;
 type FailResponse = Error;
 
-export default function useRegisterRequest(newUser: UserBody, onSuccess?: onSuccessFn<SuccessResponse>, onFail?: onFailFn<FailResponse>) {
+export default function useGetUserRequest(userId: number, onSuccess?: onSuccessFn<SuccessResponse>, onFail?: onFailFn<FailResponse>) {
   return useApi(
-    new ApiRequest("/api/users", ApiRequestType.POST, {}, newUser, true),
+    new ApiRequest(`/api/users/${userId}`, ApiRequestType.GET),
     onSuccess,
     onFail,
-    false,
   );
 }

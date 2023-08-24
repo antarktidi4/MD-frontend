@@ -11,7 +11,7 @@ export default function FormButton({ text, isLoading, name = undefined, type = "
   return (
     <button
       {...props}
-      class={`w-full flex flex-row justify-center m-auto p-0.5 rounded ${isLoading ? "bg-nord1" : "bg-nord2 hover:bg-nord3"}`}
+      class="w-full flex flex-row justify-center m-auto p-0.5 rounded bg-nord2 enabled:hover:bg-nord3 disabled:bg-nord1"
       type={type}
       name={name}
       disabled={isLoading}

@@ -19,7 +19,7 @@ function Header() {
   return (
     <div>
       <p class="text-2xl text-center">MovieDiary - Это в первую очередь коммьюнити.</p>
-      <p class="text-sm text-nord3 -mt-1 text-center">А во вторую - 3 душных фильма подряд.</p>
+      <p class="text-sm text-nord3 text-center">А во вторую - 3 душных фильма подряд.</p>
     </div>
   );
 }
