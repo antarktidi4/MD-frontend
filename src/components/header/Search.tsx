@@ -26,7 +26,7 @@ export default function Search() {
   }, [searchState.value])
 
   function onEnter() {
-    if (!searchState.value || searchState.value.length === 0) {
+    if ((!searchState.value || searchState.value.length === 0) && randomMovie?.id !== undefined) {
       window.location.href = `/movie/${randomMovie.id}`;
     } else {
       window.location.href = `/search/${encodeURI(searchState.value)}`;
@@ -38,7 +38,7 @@ export default function Search() {
       <input
         class="p-1 w-full text-center rounded bg-nord2 placeholder:text-center placeholder:text-nord9 hover:bg-nord3 focus:bg-nord3 focus:outline-none"
         type="text"
-        placeholder={`Давай посмотрим... ${randomMovie.title}?`}
+        placeholder={randomMovie?.title !== undefined ? `Давай посмотрим... ${randomMovie.title}?` : "Поиск"}
         value={searchState.value}
         onInput={(e) => setSearchState({ ...searchState, value: (e.target as HTMLInputElement).value })}
         onFocus={() => setSearchState({ ...searchState, searched: true })}
