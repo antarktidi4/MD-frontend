@@ -36,7 +36,7 @@ export function App() {
   }
 
   return (
-    <div class="scrollbar-hide text-nord6 bg-nord0">
+    <div class="text-nord6 bg-nord0">
       <ToastContainer
         position="bottom-right"
         limit={5}
