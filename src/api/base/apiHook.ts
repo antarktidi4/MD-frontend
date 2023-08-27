@@ -10,6 +10,9 @@ export default function useApi<S, F, B = void>(request: ApiRequest<B>, onSuccess
   const [isError, setError] = useState<boolean>(false);
 
   function call() {
+    setLoading(defaultLoading);
+    setError(false);
+
     fetch(request.toURI(), {
       method: request.type,
       mode: "cors",
