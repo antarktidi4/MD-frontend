@@ -4,7 +4,7 @@ import ApiRequest, { ApiRequestType } from "@api/base/apiRequest";
 type PopularMovie = {
   id: number,
   title: string,
-  poster: string,
+  posterUrl: string,
   reviewCount: number;
 };
 
