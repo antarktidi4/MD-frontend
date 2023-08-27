@@ -38,8 +38,6 @@ function Header({ id }: MovieProps) {
 
   useEffect(() => call(), [id, findKp]);
 
-  console.log(`findKp: ${findKp}\nresponse: %o\nis loading: ${isLoading}\nisError: ${isError}`, response);
-
   if (isLoading) return <Loading />;
   if (isError && !findKp && response.fail.statusCode === 422) setFindKp(true);
   if (isError) return <Error message={response.fail.message} />;
