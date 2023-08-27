@@ -1,5 +1,6 @@
 import { useState } from "preact/hooks";
 import ApiRequest from "./apiRequest";
+import { tokenStore } from "@stores/tokenStore";
 
 export type onSuccessFn<T> = (res: T) => void;
 export type onFailFn<T> = (res: T) => void;
@@ -8,6 +9,7 @@ export default function useApi<S, F, B = void>(request: ApiRequest<B>, onSuccess
   const [response, setResponse] = useState<{ success?: S, fail?: F } | null>(null);
   const [isLoading, setLoading] = useState<boolean>(defaultLoading);
   const [isError, setError] = useState<boolean>(false);
+  const token = tokenStore(state => state.token);
 
   function call() {
     setLoading(defaultLoading);
@@ -18,7 +20,7 @@ export default function useApi<S, F, B = void>(request: ApiRequest<B>, onSuccess
       mode: "cors",
       headers: {
         ...(request.contentType && { "Content-Type": request.contentType }),
-        ...(!request.publicEndpoint && { "Authorization": `Bearer ${JSON.parse(localStorage.getItem("token"))?.state?.token}` })
+        ...(!request.publicEndpoint && !token && { "Authorization": `Bearer ${token}` })
       },
       ...(request.body && { body: (request.body instanceof FormData ? request.body : JSON.stringify(request.body)) })
     })
