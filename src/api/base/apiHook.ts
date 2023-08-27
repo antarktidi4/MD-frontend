@@ -20,7 +20,7 @@ export default function useApi<S, F, B = void>(request: ApiRequest<B>, onSuccess
       mode: "cors",
       headers: {
         ...(request.contentType && { "Content-Type": request.contentType }),
-        ...(!request.publicEndpoint && !token && { "Authorization": `Bearer ${token}` })
+        ...(!request.publicEndpoint && token !== undefined && token !== null && { "Authorization": `Bearer ${token}` })
       },
       ...(request.body && { body: (request.body instanceof FormData ? request.body : JSON.stringify(request.body)) })
     })
