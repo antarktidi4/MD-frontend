@@ -1,34 +1,15 @@
+import { Movie } from "@api/commonTypes/movie";
+import { Review } from "@api/commonTypes/review";
 import Card from "@components/atomic/Card"
 import RatingTable, { Direction } from "@components/atomic/RatingTable"
 import ReviewCard from "@components/reviewCards/ReviewCard"
 import trim from "@utils/trim"
 
-interface User {
-  id: number;
-  username: string;
-  avatar: string | null;
-}
-
-interface Review {
-  id: number;
-  user: User;
-  rating: number;
-  review: string;
-}
-
-interface ExpandedMovieCardProps {
-  id: number;
-  title: string;
-  releaseYear: number;
-  description: string;
-  kpRating: number;
-  imdbRating: number;
-  averageRating: number;
-  posterUrl: string;
+type ExpandedMovie = {
   reviews: Array<Review>;
-}
+} & Movie;
 
-export default function ExpandedMovieCard({ id, title, releaseYear, description, kpRating, imdbRating, averageRating, posterUrl, reviews }: ExpandedMovieCardProps) {
+export default function ExpandedMovieCard({ id, title, releaseYear, description, kpRating, imdbRating, averageRating, posterUrl, reviews }: ExpandedMovie) {
   return (
     <Card
       header={<Header id={id} title={title} releaseYear={releaseYear} />}
@@ -41,14 +22,7 @@ export default function ExpandedMovieCard({ id, title, releaseYear, description,
         </div>
         <div>
           {reviews?.map(r =>
-            <ReviewCard
-              id={r.id}
-              userId={r.user.id}
-              username={r.user.username}
-              avatar={r.user.avatar}
-              rating={r.rating} 
-              review={trim(r.review)}
-            />
+            <ReviewCard {...r} review={trim(r.review)} />
           )}
         </div>
       </div>
@@ -56,7 +30,7 @@ export default function ExpandedMovieCard({ id, title, releaseYear, description,
   );
 }
 
-type HeaderProps = Pick<ExpandedMovieCardProps, "id" | "title" | "releaseYear">;
+type HeaderProps = Pick<ExpandedMovie, "id" | "title" | "releaseYear">;
 
 function Header({ id, title, releaseYear }: HeaderProps) {
   return (

@@ -1,24 +1,9 @@
 import Card from "@components/atomic/Card"
 import GenreList from "./GenreList"
 import RatingTable from "@components/atomic/RatingTable"
+import { Movie } from "@api/commonTypes/movie";
 
-interface Genre {
-  name: string;
-}
-
-interface MovieCardProps {
-  id: number;
-  title: string;
-  releaseYear: number;
-  description: string;
-  kpRating: number;
-  imdbRating: number;
-  averageRating: number;
-  posterUrl: string;
-  genres: Array<Genre>;
-}
-
-export default function MovieCard({ id, title, releaseYear, averageRating, kpRating, imdbRating, posterUrl, description, genres }: MovieCardProps) {
+export default function MovieCard({ id, title, description, releaseYear, kpRating, imdbRating, averageRating, genres, posterUrl }: Movie) {
   return (
     <Card
       header={<Header title={title} releaseYear={releaseYear} />}
@@ -34,7 +19,7 @@ export default function MovieCard({ id, title, releaseYear, averageRating, kpRat
   );
 }
 
-type HeaderProps = Pick<MovieCardProps, "title" | "releaseYear">
+type HeaderProps = Pick<Movie, "title" | "releaseYear">
 
 function Header({ title, releaseYear }: HeaderProps) {
   return (
@@ -46,7 +31,7 @@ function Header({ title, releaseYear }: HeaderProps) {
   );
 }
 
-type YohohoButtonProps = Pick<MovieCardProps, "id">
+type YohohoButtonProps = Pick<Movie, "id">
 
 function YohohoButton({ id }: YohohoButtonProps) {
   return (

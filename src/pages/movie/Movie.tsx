@@ -160,7 +160,7 @@ function ReviewList({ id, changed }: ReviewListProps) {
   return (
     <div class="mt-1">
       {response.success.pages > 1 ? <Paginator page={response.success.page} maxPage={response.success.pages} setPage={setPage} /> : null}
-      {response.success.reviews.map(r => <ReviewCard {...r} {...r.user} userId={r.user.id} />)}
+      {response.success.reviews.map(r =>  <ReviewCard {...r} />)}
       {response.success.pages > 1 ? <Paginator page={response.success.page} maxPage={response.success.pages} setPage={setPage} /> : null}
     </div>
   );

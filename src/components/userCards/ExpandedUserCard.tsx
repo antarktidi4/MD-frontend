@@ -1,12 +1,7 @@
+import { User } from "@api/commonTypes/user";
 import Avatar from "./Avatar";
 
-interface ExpandedUserCardProps {
-  username: string;
-  avatar: string | null; // почему, блять, это аватар, а не avatarUrl?
-  about: string;
-}
-
-export default function ExpandedUserCard({ username, avatar, about }: ExpandedUserCardProps) {
+export default function ExpandedUserCard({ username, avatar, about }: User) {
   return (
     <div class="flex flex-row p-2 rounded shadow-sm bg-nord1">
       <Avatar nickname={username} url={avatar} size={128} />

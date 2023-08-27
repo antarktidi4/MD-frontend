@@ -1,17 +1,15 @@
+import { Review } from "@api/commonTypes/review";
 import Card from "@components/atomic/Card"
 import ColoredRating from "@components/atomic/ColoredRating"
 import markdownSettings from "@utils/markdownSettings";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown"
 
-interface ReviewCardProps {
-  id: number;
+type ReviewCardProps = {
   title: string;
   releaseYear: number;
   posterUrl: string;
   averageRating: number;
-  rating: number;
-  review: string;
-}
+} & Omit<Review, "user" | "movieId">;
 
 export default function ExpandedReviewCard({ id, title, releaseYear, posterUrl, averageRating, rating, review }: ReviewCardProps) {
   return (

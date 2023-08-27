@@ -18,7 +18,7 @@ export default function Header() {
       <div class="basis-1/6 flex justify-end pe-2">
         {
           user !== null ?
-            <UserCard direction={Direction.RIGHT} avatarUrl={user.avatar} nickname={user.username} id={user.id} /> :
+            <UserCard direction={Direction.RIGHT} {...user} /> :
             <a class="pt-1" href="/login">Log In</a>
         }
       </div>
