@@ -1,9 +1,18 @@
 import { defineConfig } from "vite";
+import { VitePWA } from "vite-plugin-pwa";
 import preact from "@preact/preset-vite";
 import path from "path";
 
 export default defineConfig({
-	plugins: [preact()],
+	plugins: [
+    preact(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
+      }
+    })
+  ],
   resolve: {
     alias: {
       "@components": path.resolve(__dirname, "./src/components"),

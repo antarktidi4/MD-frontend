@@ -16,6 +16,7 @@ export default function Avatar({ size = defaultSize, nickname, url = null }: Ava
       width={size}
       height={size}
       src={url === null ? generateAvatar(size, nickname) : url}
+      alt="Аватар"
     />
   );
 }

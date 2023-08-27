@@ -16,7 +16,7 @@ export default function Card({ header = null, imageURL = null, imageInfo = null,
       <div class="flex flex-row m-2">
         {imageURL &&
           <div class="flex flex-col w-2/12 me-2">
-            <img class="w-full rounded shadow-sm" src={imageURL} />
+            <img class="w-full rounded shadow-sm" src={imageURL} alt="image.." width="100%" height="auto" />
             {imageInfo &&
               <div class="mt-1 h-full">
                 {imageInfo}

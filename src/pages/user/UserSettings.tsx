@@ -84,6 +84,7 @@ function AvatarUpdate() {
         <img
           id="avatar_preview"
           class="h-auto rounded"
+          width="100%"
           height={96}
           src={user.avatar}
           placeholder="Аватар"
