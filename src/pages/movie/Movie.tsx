@@ -33,12 +33,16 @@ export default function Movie({ id }: MovieProps) {
 }
 
 function Header({ id }: MovieProps) {
-  const { call, response, isLoading, isError } = useMovieRequest(id);
+  const [findKp, setFindKp] = useState(false);
+  const { call, response, isLoading, isError } = useMovieRequest(id, { findKp });
 
-  useEffect(() => call(), [id])
+  useEffect(() => call(), [id, findKp]);
+
+  console.log(`findKp: ${findKp}\nresponse: %o\nis loading: ${isLoading}\nisError: ${isError}`, response);
 
   if (isLoading) return <Loading />;
-  if (isError) return <Error message={response.fail.message} />
+  if (isError && !findKp && response.fail.statusCode === 422) setFindKp(true);
+  if (isError) return <Error message={response.fail.message} />;
 
   return <MovieCard {...response.success} />;
 }
