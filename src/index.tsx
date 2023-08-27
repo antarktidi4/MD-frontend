@@ -50,7 +50,7 @@ export function App() {
       <Header />
       <div class="flex flex-col justify-center mx-auto mt-2 w-4/6">
         <LocationProvider>
-          <Router>
+          <Router onRouteChange={(url) => url.startsWith("/swagger") && window.location.reload()}>
             <Route path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
