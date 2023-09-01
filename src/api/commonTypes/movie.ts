@@ -10,4 +10,5 @@ export type Movie = {
   averageRating: number,
   genres: Array<Genre>,
   posterUrl: string,
+  isFavorite: boolean,
 }
