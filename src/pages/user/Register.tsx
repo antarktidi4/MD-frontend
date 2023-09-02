@@ -1,5 +1,5 @@
 import useRegisterRequest from "@api/user/registerRequest";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import { toast } from "react-toastify";
 import Form from "../../components/atomic/form/Form";
 import FormInput from "../../components/atomic/form/FormInput";
@@ -7,6 +7,7 @@ import FormButton from "@components/atomic/form/FormButton";
 
 export default function Register() {
   const [formState, setFormState] = useState({ username: "", email: "", password: "", confirmPassword: "" });
+  const passwordField = useRef<HTMLInputElement>(null);
   const { call, isLoading } = useRegisterRequest(
     formState,
     () => window.location.replace(`${window.origin}/login`),
@@ -14,12 +15,10 @@ export default function Register() {
   );
 
   useEffect(() => {
+    if (passwordField.current === null) return;
     const passwordsEquals = formState.password === formState.confirmPassword;
     const message = passwordsEquals ? "" : "Пароли не совпадают";
-
-    (document
-      .getElementById("confirm_password") as HTMLInputElement)
-      .setCustomValidity(message);
+    passwordField.current.setCustomValidity(message);
   }, [formState.confirmPassword, formState.password])
 
   function onSubmit(event: Event) {
@@ -48,7 +47,8 @@ export default function Register() {
         <FormInput
           value={formState.confirmPassword}
           onInput={t => setFormState({ ...formState, confirmPassword: t.value })}
-          placeholder="password" autocomplete="new-password" type="password" id="confirm_password"
+          placeholder="password" autocomplete="new-password" type="password"
+          ref={passwordField}
         />
         <FormButton
           isLoading={isLoading}

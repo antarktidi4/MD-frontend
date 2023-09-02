@@ -1,16 +1,11 @@
-import useGetFavoriteMoviesRequest from "@api/movie/getFavoriteMoviesRequest";
-import useUserMoviesRequest from "@api/movie/userMoviesRequest";
 import useGetUserRequest from "@api/user/getUserRequest";
-import Paginator from "@components/atomic/Paginator";
-import FoldedMovieCard from "@components/movieCards/FoldedMovieCard";
-import MovieCard from "@components/movieCards/MovieCard";
-import ExpandedReviewCard from "@components/reviewCards/ExpandedReviewCard";
+import UserFavoriteMovieList from "@components/movieCards/UserFavoriteMovieList";
+import UserReviewList from "@components/reviewCards/UserReviewList";
 import ExpandedUserCard from "@components/userCards/ExpandedUserCard";
 import Error from "@pages/Error";
 import Loading from "@pages/Loading";
 import { userStore } from "@stores/userStore";
 import { useEffect, useState } from "preact/hooks";
-import { toast } from "react-toastify";
 
 
 interface UserProps {
@@ -42,51 +37,11 @@ export default function User({ id }: UserProps) {
         </button>
       </div>
       {isReviewState ?
-        <UserReviews id={id} /> :
-        <UserFavorites id={id} />
+        <UserReviewList id={id} /> :
+        <UserFavoriteMovieList id={id} />
       }
     </div>
   );
 }
 
-function UserReviews({ id }: UserProps) {
-  const [page, setPage] = useState(1);
-  const { call, response, isLoading, isError } = useUserMoviesRequest(
-    id, { page }, () => { },
-    error => toast.error(error.message)
-  );
 
-  useEffect(() => call(), [page, id]);
-
-  if (isLoading) return <Loading />;
-  if (isError) return <Error message={response?.fail?.message} />;
-
-  return (
-    <div>
-      {response.success.pages > 1 ? <Paginator page={response.success.page} maxPage={response.success.pages} setPage={setPage} /> : null}
-      {response.success.movies.map(m => <ExpandedReviewCard {...m} />)}
-      {response.success.pages > 1 ? <Paginator page={response.success.page} maxPage={response.success.pages} setPage={setPage} /> : null}
-    </div>
-  );
-}
-
-function UserFavorites({ id }: UserProps) {
-  const [page, setPage] = useState(1);
-  const { call, response, isLoading, isError } = useGetFavoriteMoviesRequest(
-    { userId: id, page }, () => { },
-    error => toast.error(error.message)
-  );
-
-  useEffect(() => call(), [id]);
-
-  if (isLoading) return <Loading />;
-  if (isError) return <Error message={response?.fail?.message} />;
-
-  return (
-    <div>
-    {response.success.pages > 1 ? <Paginator page={response.success.page} maxPage={response.success.pages} setPage={setPage} /> : null}
-      {response.success.movies.map(m => <MovieCard {...m} />)}
-      {response.success.pages > 1 ? <Paginator page={response.success.page} maxPage={response.success.pages} setPage={setPage} /> : null}
-    </div>
-  );
-}
