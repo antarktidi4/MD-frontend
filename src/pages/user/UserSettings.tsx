@@ -15,7 +15,7 @@ interface UserSettingsProps {
 export default function UserSetting({ id }: UserSettingsProps) {
   const user = userStore(state => state.user);
 
-  if (user.id !== Number(id)) return <Joke />;
+  if (user.id !== Number(id)) return (<div>Не твои настройки, дружок.</div>);
 
   return (
     <div class="flex flex-row gap-2 w-full">
@@ -31,7 +31,7 @@ function UpdateAbout() {
   const { call, isLoading } = useUpdateAboutRequest(
     user.id,
     { about },
-    data => setUser(data),
+    data => { setUser(data); toast.success("Описание профиля обновлено"); },
     error => toast.error(error.message),
   );
 
@@ -110,22 +110,3 @@ function AvatarUpdate() {
   );
 }
 
-function Joke() {
-  return (
-    <h1 class="bg-nord1 p-1 rounded">
-      Идет прапорщик по танковой части - видит, что боец с молотком на палец стоит дует.<br />
-      - В чем дело?<br />
-      - Да вот гвоздь забивал, по пальцу попал.<br />
-      - Кто-ж так бьет?! Смотри как надо!<br />
-      Берет гвоздь и лбом его по самую шляпу в стену вгоняет.<br />
-      Боец офигевает от такого и спрашивает:<br />
-      - Т. пропорщик, а в бетонную стену можете?<br />
-      - Да без вопросов!<br />
-      Берет гвоздь и опять по шляпу в стену лбом загоняет.<br />
-      Боец еще больше офигевает, но не отстает:<br />
-      - Т. прапорщик, а в броню можете?<br />
-      - Да без проблем!<br />
-      Берет гвоздь и в танк лбом по гвоздю лупит. Гвоздь гнется но не лезет. Прапор берет второй гвоздь, опять бьет, и опять гвоздь гнется. Тут прапор не выдерживает, лезет в танк, а там - другой прапор спит и головой к броне прислонился.<br />
-    </h1>
-  );
-}
